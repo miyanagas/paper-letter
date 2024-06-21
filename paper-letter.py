@@ -3,6 +3,7 @@ import arxiv
 from linebot import LineBotApi
 from linebot.models import TextSendMessage
 import os
+from dotenv import load_dotenv
 
 # テンプレートを用意
 QUERY_TEMPLATE = '%28 ti:%22{}%22 OR abs:%22{}%22 %29 AND submittedDate: [{} TO {}]'
@@ -42,7 +43,8 @@ for result in search.results():
     result_list.append(result)
 
 # LINE Botのチャンネルアクセストークン
-LINE_CHANNEL_ACCESS_TOKEN = "T8isp2SiJ3Cpdlw+A67FYbLVebZyL5E0o/DdPOVXPvNJJpSdSjikxMfMUe+1nYyBgX7X2eTH2Cm+94J+IvxUsBirfxthD4bslLIb0sMllKEQX2pSVKLHCm38f3kVLs/e7MHmAwpBdcZpmPIC0rw4TQdB04t89/1O/w1cDnyilFU="
+load_dotenv()
+LINE_CHANNEL_ACCESS_TOKEN = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 
 # LINEに送信するメッセージを作成
